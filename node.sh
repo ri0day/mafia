@@ -20,6 +20,7 @@ $NC -l $command_recv_port|while read command
 do
 	echo "start listen" >/tmp/debug.log
 	[ $debug -eq 1 ]&&echo "$command executed"||:	
+	sleep (cat /dev/urandom| tr -dc '0-9' | fold -w 1| head -n 1
 	eval "$command" $data_store_dir/$data_store_file |$NC  $gathering_ip $gathering_port
 	echo "$command $data_store_dir/$data_store_file |$NC  $gathering_ip $gathering_port" >/tmp/1.txt
 done&
