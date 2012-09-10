@@ -9,20 +9,20 @@ mafia
 * 程序默认使用了 1083 1804 5230 端口,需要在节点和主控程序
 
 ####程序说明:
-* main.sh   result_recv.sh   node.sh  
+* mafia.sh   result_recv.sh   node.sh  
 
-* `mian.sh` 是主控程序,触发任务,(在这个脚本中定义处理的逻辑与决定处理的节点)  
+* `mafia.sh` 是主控程序,触发任务,(在这个脚本中定义处理的逻辑与决定处理的节点)  
 * `result_recv.sh` 是接收其他节点处理完成后的数据  
 * `node.sh` 节点运算的脚本.就是从主控节点接收数据与命令.然后使用主控传过来的命令处理接收到的数据.最后返回给result_recv.sh所在节点
 
 ###使用步骤:
  * host7-1 host7-2 是运算节点.`将node.sh 脚本放到2台机器的/tmp目录下  `
- * host5-7 是result_recv.sh 节点 与主控程序. `将mian.sh 与result_recv.sh 放到/tmp 目录`    
+ * host5-7 是result_recv.sh 节点 与主控程序. `将mafia.sh 与result_recv.sh 放到/tmp 目录`    
  * 启动result_recv.sh (`后台模式`)    
  * 执行测试命令 (`由于awk 里有需要转义的特殊符,所以需要转义`) ,测试文件是 /etc/passwd copy 到 /tmp/da的
 
 ```
-[root@host5-7 tmp]# ./main.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
+[root@host5-7 tmp]# ./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
 node_list is :10.0.7.1 10.0.7.2
 command is awk -F"/" '$NF ~ /nologin/{print $0}'
 raw_data_file is /tmp/da/passwd
