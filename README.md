@@ -4,9 +4,9 @@ mafia
 ###simple bash distribute compute framework 
 =====
 ###运行环境要求:  
-* 主控程序所在机器需要与其他节点做ssh信任.用rsa证书自动登录.也就是登录时候不需要交互式输入密码  
+* 推荐主控程序所在机器需要与其他节点做ssh信任.用rsa证书自动登录.也就是登录时候不需要交互式输入密码 ,当然你也可以手动输入密码,也是可行的.
 * 需要将node.sh放到运算节点上并且有执行权限.  
-* 程序默认使用了 1083 1804 5230 端口,需要在节点和主控程序
+* 程序默认使用了 1083 1804 5230 端口,需要保障节点和主控程序在这几个端口上无阻碍通讯
 
 ####程序说明:
 * mafia.sh   result_recv.sh   node.sh  include.lib
@@ -21,7 +21,7 @@ mafia
  * host7-1 host7-2 是运算节点.`将node.sh 脚本放到2台机器的/tmp目录下  `
  * host5-7 是result_recv.sh 节点 与主控程序. `将mafia.sh 与result_recv.sh 放到/tmp 目录`    
  * 启动result_recv.sh (`后台模式`)    
- * 执行测试命令 (`由于awk 里有需要转义的特殊符,所以需要转义`) ,测试文件是 /etc/passwd copy 到 /tmp/da的
+ * 执行测试命令 (`由于awk 里有需要转义的特殊符,所以需要转义`)   BTW:测试文件是 /etc/passwd copy 到 /tmp/da的
 
 ```
 [root@host5-7 tmp]# ./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
