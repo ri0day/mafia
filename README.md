@@ -9,11 +9,13 @@ mafia
 * 程序默认使用了 1083 1804 5230 端口,需要在节点和主控程序
 
 ####程序说明:
-* mafia.sh   result_recv.sh   node.sh  
+* mafia.sh   result_recv.sh   node.sh  include.lib
 
 * `mafia.sh` 是主控程序,触发任务,(在这个脚本中定义处理的逻辑与决定处理的节点)  
 * `result_recv.sh` 是接收其他节点处理完成后的数据  
 * `node.sh` 节点运算的脚本.就是从主控节点接收数据与命令.然后使用主控传过来的命令处理接收到的数据.最后返回给result_recv.sh所在节点
+* `include.lib` 主控程序逻辑函数集合.
+
 
 ###使用步骤:
  * host7-1 host7-2 是运算节点.`将node.sh 脚本放到2台机器的/tmp目录下  `
