@@ -17,7 +17,7 @@ mafia
 * `include.lib` 主控程序逻辑函数集合.
 
 
-###使用步骤:
+###使用步骤(command mode):
  * host7-1 host7-2 是运算节点.`将node.sh 脚本放到2台机器的/tmp目录下  `
  * host5-7 是result_recv.sh 节点 与主控程序. `将mafia.sh 与result_recv.sh 放到/tmp 目录`    
  * 启动result_recv.sh (`后台模式`)    
@@ -48,4 +48,55 @@ result_recv 节点
 ```
 [root@host5-7 opt]# wc -l result_data_recv.dat 
 28 result_data_recv.dat
+```
+
+###script mode:
+script mode 需要使用特定的command 关键字"script" 以及要指定 script的决定路径   
+-----
+./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py   
+```
+[root@host5-7 tmp]# cat s.py 
+#!/usr/bin/python
+import sys
+
+filename=sys.argv[1]
+
+f = open(filename,'r').readlines()
+for x in f:
+        shell=x.split(":")[-1].strip()
+        if shell == "/sbin/nologin":
+                print "%s:%s"%(x.split(":")[0],shell)
+```
+
+检查数据:
+```
+[root@host5-7 tmp]# cat /opt/result_data_recv.dat 
+bin:/sbin/nologin
+daemon:/sbin/nologin
+adm:/sbin/nologin
+lp:/sbin/nologin
+mail:/sbin/nologin
+uucp:/sbin/nologin
+operator:/sbin/nologin
+games:/sbin/nologin
+gopher:/sbin/nologin
+ftp:/sbin/nologin
+nobody:/sbin/nologin
+vcsa:/sbin/nologin
+dbus:/sbin/nologin
+sshd:/sbin/nologin
+haldaemon:/sbin/nologin
+rpc:/sbin/nologin
+apache:/sbin/nologin
+avahi:/sbin/nologin
+mailnull:/sbin/nologin
+smmsp:/sbin/nologin
+rpcuser:/sbin/nologin
+nfsnobody:/sbin/nologin
+oprofile:/sbin/nologin
+pcap:/sbin/nologin
+ntp:/sbin/nologin
+xfs:/sbin/nologin
+avahi-autoipd:/sbin/nologin
+sabayon:/sbin/nologin
 ```

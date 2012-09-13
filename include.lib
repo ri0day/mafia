@@ -1,9 +1,13 @@
 usage() {
 format_usage="Usage:
-\t\t example:./mafia.sh -h \"10.0.7.1 10.0.7.2\" -f /tmp/da/passwd -c \"sort\" \n \
+\t\t command mode example:./mafia.sh -h \"10.0.7.1 10.0.7.2\" -f /tmp/da/passwd -c \"sort\" \n \
+\t\t script mode example:./mafia.sh -h \"10.0.7.1 10.0.7.2\" -f /tmp/da/passwd -c script -s /tmp/s.py \n \
+\n
 \t\t [-h host]\t remote nodes ip address or hostname \n \
 \t\t [-f filename]\t specifed data file,the data will be split and send to nodes \n \
-\t\t [-c command]\t specifed command will be send to nodes. "
+\t\t [-c command]\t specifed command will be send to nodes.  \n \
+\t\t [-s script filename] specifed script handle you data. will be send to nodes."
+
 echo -e $format_usage
 }
 
@@ -107,5 +111,14 @@ do
 
         echo "$command"|$NC $node $command_recv_port
         echo "awk -F":" \'\$1 ~/root/{print \$0}\'|$NC $node $command_recv_port"
+done
+}
+
+send_script_to_nodes() {
+script_abs_filename=$1
+local_filename=$2
+for i in ${node_list[@]}
+do 
+ssh $username@$i "cat - >$script_abs_filename" <$local_filename
 done
 }
