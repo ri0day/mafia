@@ -49,9 +49,11 @@ result_recv 节点
 [root@host5-7 opt]# wc -l result_data_recv.dat 
 28 result_data_recv.dat
 ```
+-----
 
 ###script mode:
-script mode 需要使用特定的command 关键字"script" 以及要指定 script的决定路径   
+
+script mode 需要使用特定的command 关键字"script" 以及要指定 script的决定路径 
 -----
 ./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py   
 ```
