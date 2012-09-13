@@ -2,7 +2,64 @@ mafia
 =====
 
 ###simple bash distribute compute framework 
-=====
+
+
+###==What it do==
+* split you data by number of nodes ,send every pieces of data to  node, and process data by you specifed command or script .finally, send the result back
+
+###==Requirements==
+ * bash
+ * linux command: nc ,cat ,ifconfig ,ssh
+
+###==role define==   
+* controler  
+* nodes   
+* recevier  
+#####controler: mafia.sh , the main componet of framewoker ,the script receive argument from user input ,parse argument,define global variable ,communication with nodes
+#####nodes: node.sh ,the script recevie data and command from controler, handler data by specified command or script ,send the result to receiver.  
+#####receiver: result_recv.sh ,the script receive result from nodes.  
+
+###==quick start==   
+make sure login to node without input passwd
+```
+[root@controler]# ssh-keygen -t rsa
+[root@controler]# ssh-copy-id ~/.ssh/id_rsa.pub username@node[1-2]
+```
+1.put node.sh on node server /tmp/node.sh and grant execute permission
+```
+[root@node1]#chmod+x /tmp/node.sh
+[root@node2]#chmod+x /tmp/node.sh
+```
+2.run result_recv.sh in background on controler
+```
+[root@controler]# ./result_recv.sh & (background mode)
+```
+3.prepare data for test
+```
+[root@controler]# mkdir -/tmp/da
+[root@controler]# cp -a /etc/passwd /tmp/da/passwd
+```
+4.run test
+command mode:
+```
+[root@controler]#./mafia.sh -h "node1 node2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
+```
+script mode:
+```
+[root@controler]#./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py
+
+[root@controler ~]# cat /tmp/s.py 
+#!/usr/bin/python
+import sys
+filename=sys.argv[1]
+f = open(filename,'r').readlines()
+for x in f:
+        shell=x.split(":")[-1].strip()
+        if shell == "/sbin/nologin":
+                print "%s:%s"%(x.split(":")[0],shell)
+```
+
+ =====
 ###运行环境要求:  
 * 推荐主控程序所在机器需要与其他节点做ssh信任.用rsa证书自动登录.也就是登录时候不需要交互式输入密码 ,当然你也可以手动输入密码,也是可行的.
 * 需要将node.sh放到运算节点上并且有执行权限.  
