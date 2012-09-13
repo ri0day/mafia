@@ -15,9 +15,9 @@ mafia
 * controler  
 * nodes   
 * recevier  
-#####controler: mafia.sh , the main componet of framewoker ,the script receive argument from user input ,parse argument,define global variable ,communication with nodes
-#####nodes: node.sh ,the script recevie data and command from controler, handler data by specified command or script ,send the result to receiver.  
-#####receiver: result_recv.sh ,the script receive result from nodes.  
+#####controler: mafia.sh , the main componet of framewoker ,the script receive argument from user input ,parse argument,define global variable ,communication with nodes   
+#####nodes: node.sh ,the script recevie data and command from controler, handler data by specified command or script ,send the result to receiver.    
+#####receiver: result_recv.sh ,the script receive result from nodes.     
 
 ###==quick start==   
 make sure login to node without input passwd
@@ -59,7 +59,7 @@ for x in f:
                 print "%s:%s"%(x.split(":")[0],shell)
 ```
 
- =====
+----
 ###运行环境要求:  
 * 推荐主控程序所在机器需要与其他节点做ssh信任.用rsa证书自动登录.也就是登录时候不需要交互式输入密码 ,当然你也可以手动输入密码,也是可行的.
 * 需要将node.sh放到运算节点上并且有执行权限.  
