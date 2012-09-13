@@ -42,12 +42,11 @@ make sure login to node without input passwd
 [root@controler]# mkdir -/tmp/da
 [root@controler]# cp -a /etc/passwd /tmp/da/passwd
 ```
-4.run test
-command mode:
+4.run test(command mode):
 ```
 [root@controler]#./mafia.sh -h "node1 node2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
 ```
-run test script mode:
+run test (script mode):
 ```
 [root@controler]#./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py
 
