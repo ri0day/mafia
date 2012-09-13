@@ -47,7 +47,7 @@ command mode:
 ```
 [root@controler]#./mafia.sh -h "node1 node2" -f /tmp/da/passwd -c "awk -F\"/\" '\$NF ~ /nologin/{print \$0}'"
 ```
-script mode:
+run test script mode:
 ```
 [root@controler]#./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py
 
