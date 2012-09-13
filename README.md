@@ -48,7 +48,7 @@ make sure login to node without input passwd
 ```
 run test (script mode):
 ```
-[root@controler]#./mafia.sh -h "10.0.7.1 10.0.7.2" -f /tmp/da/passwd -c script -s /tmp/s.py
+[root@controler]#./mafia.sh -h "node1 node2" -f /tmp/da/passwd -c script -s /tmp/s.py
 
 [root@controler ~]# cat /tmp/s.py 
 #!/usr/bin/python
