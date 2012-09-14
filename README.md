@@ -16,7 +16,7 @@ mafia
 * nodes   
 * recevier  
 
-controler: mafia.sh , the main componet of framewoker ,the script receive argument from user input ,parse argument,define global variable ,communication with nodes  
+controler: mafia.sh , the main componet of framewoker ,the script receive parameters from user input ,parse parameters,define global variable ,communication with nodes  
 
 nodes: node.sh ,the script recevie data and command from controler, handler data by specified command or script ,send the result to receiver.    
 
