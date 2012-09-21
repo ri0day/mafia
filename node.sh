@@ -12,6 +12,7 @@ debug=1
 send_node_script_abs_filename="/tmp/process.script"
 
 echo>/tmp/data_recv.dat
+mkdir -p $data_store_dir >/dev/null 2>&1
 
 listener_bind="$(/sbin/ifconfig $interface |sed -n '/inet addr:/p'|awk '{print $2}')"
 ip=${listener_bind#*:}

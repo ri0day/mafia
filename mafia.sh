@@ -13,6 +13,9 @@ username="wumin"
 node_handler_file="/tmp/node.sh"
 send_node_script_abs_filename="/tmp/process.script"
 
+
+mkdir -p $data_store_dir >/dev/null 2>&1
+
 if [ $# -lt 6  ]
 then
 	usage

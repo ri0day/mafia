@@ -9,6 +9,8 @@ gathering_port="5230"
 NC="/usr/bin/nc"
 debug=1
 
+mkdir -p $data_store_dir >/dev/null 2>&1
+
 listener_bind="$(/sbin/ifconfig $interface |sed -n '/inet addr:/p'|awk '{print $2}')"
 ip=${listener_bind#*:}
 while true
