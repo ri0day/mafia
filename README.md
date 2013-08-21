@@ -5,7 +5,7 @@ mafia
 
 
 ###==What it do==
-* split you data by number of nodes ,send every pieces of data to  node, and process data by you specifed command or script .finally, send the result back
+* split you data to number of  data process nodes pieces ,send every pieces of data to each node, and process data by you specifed command or script .finally, send the result to receiver node
 
 ###==Requirements==
  * bash
@@ -13,17 +13,17 @@ mafia
 
 ###==role define==   
 * controler  
-* nodes   
+* data process nodes   
 * recevier  
 
-controler: mafia.sh , the main componet of framewoker ,the script receive parameters from user input ,parse parameters,define global variable ,communication with nodes  
+controler: mafia.sh , the main componet of framework ,the script split data and send data+command to data process nodes.  
 
-nodes: node.sh ,the script recevie data and command from controler, handler data by specified command or script ,send the result to receiver.    
+nodes: node.sh ,the script recevie data and command from controler, process data by specified command or script ,send the result to receiver.    
 
 receiver: result_recv.sh ,the script receive result from nodes.     
 
 ###==quick start==   
-make sure login to node without input passwd
+make sure login to node without input password
 ```
 [root@controler]# ssh-keygen -t rsa
 [root@controler]# ssh-copy-id ~/.ssh/id_rsa.pub username@node[1-2]
@@ -33,13 +33,13 @@ make sure login to node without input passwd
 [root@node1]#chmod+x /tmp/node.sh
 [root@node2]#chmod+x /tmp/node.sh
 ```
-2.run result_recv.sh in background on controler
+2.run result_recv.sh on controler
 ```
 [root@controler]# ./result_recv.sh & (background mode)
 ```
 3.prepare data for test
 ```
-[root@controler]# mkdir -/tmp/da
+[root@controler]# mkdir -p /tmp/da
 [root@controler]# cp -a /etc/passwd /tmp/da/passwd
 ```
 4.run test(command mode):
